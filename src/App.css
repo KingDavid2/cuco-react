@@ -1,13 +1,18 @@
 html,
 input{
-  font-family:'montserrat-regular';
+  /* font-family:'montserrat-regular'; */
 }
 
 nav {
   background-color: #000;
 }
 
+.row {
+  margin: 0 auto;
+}
+
 .row .col.s4 {
+  width: 30.33% !important;
   padding: 0 !important;
 }
 

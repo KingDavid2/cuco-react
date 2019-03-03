@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import M from 'materialize-css/dist/js/materialize.min.js'
 // import axios from 'axios';
 import Painting from './Painting';
+import Dropdown from './Dropdown';
 import APIClient from '../api/client.js'
 import StackGrid, { transitions } from "react-stack-grid";
 
@@ -11,42 +13,98 @@ class ShopContainer extends Component {
   constructor(props){
       super(props)
       this.state = {
-          paintings: []
+          paintings: [],
+          artists: [],
+          prices: [],
+          mediums: [],
+          sizes: []
       }
   }
 
   componentDidMount() {
-        // axios.get('http://localhost:3001/api/v1/paintings.json', { crossdomain: true })
-        // .then(response => {
-        //     console.log(response)
-        //     this.setState({
-        //         paintings: response.data
-        //     })
-        // })
-        // .catch(error => console.log(error))
-        fetch('http://localhost:3002/api/v1/paintings')
-            .then(response => response.json())
-            .then(response => {
-                console.log(response)
-                this.setState({
-                    paintings: response
-                })
+    fetch('http://localhost:3002/api/v1/shop')
+        .then(response => response.json())
+        .then(response => {
+            // console.log(response)
+            this.setState({
+                paintings: response
             })
-            .catch(error => console.log(error))
+        })
+        .catch(error => console.log(error));
 
+    fetch('http://localhost:3002/api/v1/artists_name')
+        .then(response => response.json())
+        .then(response => {
+            // console.log(response)
+            this.setState({
+                artists: response
+            })
+        })
+        .catch(error => console.log(error));
+
+    fetch('http://localhost:3002/api/v1/prices_name')
+        .then(response => response.json())
+        .then(response => {
+            // console.log(response)
+            this.setState({
+                prices: response
+            })
+        })
+        .catch(error => console.log(error));
+
+    fetch('http://localhost:3002/api/v1/mediums_name')
+        .then(response => response.json())
+        .then(response => {
+            // console.log(response)
+            this.setState({
+                mediums: response
+            })
+        })
+        .catch(error => console.log(error));
+
+    fetch('http://localhost:3002/api/v1/sizes_name')
+        .then(response => response.json())
+        .then(response => {
+            // console.log(response)
+            this.setState({
+                sizes: response
+            })
+        })
+        .catch(error => console.log(error));
+
+
+      M.AutoInit();
     }
 
     render() {
       return (
-          // <div className="paintings-container">
-          //     {this.state.paintings.map( painting => {
-          //         return (
-          //           <Painting painting={painting} key={painting.id} />
-          //         )
-          //     })}
-          // </div>
-
           <div className="">
+            <div className="container">
+              <div className="row">
+                <div className="col s3">
+                  <Dropdown
+                    options={this.state.artists}
+                    title='Artists'/>
+                </div>
+                <div className="col s3">
+                  <Dropdown
+                    options={this.state.prices}
+                    title='Prices'/>
+                </div>
+                <div className="col s3">
+                  <Dropdown
+                    options={this.state.mediums}
+                    title='Mediums'/>
+                </div>
+                <div className="col s3">
+                  <Dropdown
+                    options={this.state.sizes}
+                    title='Sizes'/>
+                </div>
+              </div>
+            </div>
+
+
             <div className="row">
               <div className="col s4">
               <StackGrid

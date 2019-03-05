@@ -4,9 +4,9 @@ import M from 'materialize-css/dist/js/materialize.min.js'
 class Dropdown extends Component {
   constructor(props){
       super(props)
-      // this.state = {
-      //     title: ''
-      // }
+      this.state = {
+          value: []
+      }
   }
   componentDidMount() {
 
@@ -16,15 +16,21 @@ class Dropdown extends Component {
       var instances = M.FormSelect.init(elems);
   }
 
+  changeFilter = (event) => {
+    var instance = M.FormSelect.getInstance(event.target);
+    this.setState({ value: instance.getSelectedValues() });
+    this.props.filterSearch(event, this.props.title, instance.getSelectedValues());
+  }
+
   render() {
     return (
       <div className="">
         <div className="input-field">
-         <select ref="dropdown" defaultValue="1">
+         <select multiple ref="dropdown" onChange={this.changeFilter}>
            <option value="" disabled>Choose your option</option>
            {this.props.options.map( option => {
                return (
-                 <option value='{option.id}' key={option.id}>{option.name}</option>
+                 <option value={option.id} key={option.id}>{option.name}</option>
                )
            })}
          </select>

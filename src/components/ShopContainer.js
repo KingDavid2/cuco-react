@@ -11,7 +11,9 @@ const { scaleDown } = transitions;
 class ShopContainer extends Component {
 
   constructor(props){
-      super(props)
+      super(props);
+      this.filterSearch = this.filterSearch.bind(this);
+      const paintings = [];
       this.state = {
           paintings: [],
           artists: [],
@@ -76,38 +78,69 @@ class ShopContainer extends Component {
       M.AutoInit();
     }
 
+    filterSearch(event, title, selected){
+      event.preventDefault();
+      console.log(selected);
+
+      this.setState({
+        paintings: [],
+      });
+
+      fetch('http://localhost:3002/api/v1/shop?artist_id=' + selected)
+          .then(response => response.json())
+          .then(response => {
+              // console.log(response)
+              this.setState({
+                  paintings: response
+              })
+          })
+          .catch(error => console.log(error));
+    }
+
     render() {
+      const { paintings,
+              artists,
+              prices,
+              mediums,
+              sizes,
+              } = this.state;
+
       return (
           <div className="">
             <div className="container">
               <div className="row">
                 <div className="col s3">
                   <Dropdown
-                    options={this.state.artists}
-                    title='Artists'/>
+                    options={artists}
+                    title='Artists'
+                    filterSearch={this.filterSearch}/>
                 </div>
                 <div className="col s3">
                   <Dropdown
-                    options={this.state.prices}
-                    title='Prices'/>
+                    options={prices}
+                    title='Prices'
+                    filterSearch={this.filterSearch}/>
                 </div>
                 <div className="col s3">
                   <Dropdown
-                    options={this.state.mediums}
-                    title='Mediums'/>
+                    options={mediums}
+                    title='Mediums'
+                    filterSearch={this.filterSearch}/>
                 </div>
                 <div className="col s3">
                   <Dropdown
-                    options={this.state.sizes}
-                    title='Sizes'/>
+                    options={sizes}
+                    title='Sizes'
+                    filterSearch={this.filterSearch}/>
                 </div>
               </div>
             </div>
 
 
             <div className="row">
-              <div className="col s4">
+              <div className="col s12">
               <StackGrid
+              gridRef={grid => this.grid = grid}
               appear={scaleDown.appear}
               appeared={scaleDown.appeared}
               enter={scaleDown.enter}
@@ -120,49 +153,14 @@ class ShopContainer extends Component {
               >
                 {this.state.paintings.map( painting => {
                     return (
-                      <Painting painting={painting} key={painting.id} />
+                      <Painting
+                        painting={painting}
+                        key={painting.id} />
                     )
                 })}
               </StackGrid>
               </div>
-              <div className="col s4">
-              <StackGrid
-              appear={scaleDown.appear}
-              appeared={scaleDown.appeared}
-              enter={scaleDown.enter}
-              entered={scaleDown.entered}
-              leaved={scaleDown.leaved}
-              // gutterWidth={5}
-              gutterHeight={0}
-              columnWidth={180}
-              monitorImagesLoaded={true}
-              >
-                {this.state.paintings.map( painting => {
-                    return (
-                      <Painting painting={painting} key={painting.id} />
-                    )
-                })}
-              </StackGrid>
-              </div>
-              <div className="col s4">
-              <StackGrid
-              appear={scaleDown.appear}
-              appeared={scaleDown.appeared}
-              enter={scaleDown.enter}
-              entered={scaleDown.entered}
-              leaved={scaleDown.leaved}
-              // gutterWidth={5}
-              gutterHeight={0}
-              columnWidth={180}
-              monitorImagesLoaded={true}
-              >
-                {this.state.paintings.map( painting => {
-                    return (
-                      <Painting painting={painting} key={painting.id} />
-                    )
-                })}
-              </StackGrid>
-              </div>
+
             </div>
           </div>
 

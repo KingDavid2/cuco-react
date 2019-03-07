@@ -5,6 +5,10 @@ import Painting from './Painting';
 import Dropdown from './Dropdown';
 import APIClient from '../api/client.js'
 import StackGrid, { transitions } from "react-stack-grid";
+import _ from 'lodash';
+import MaterialIcon, {colorPalette} from 'material-icons-react';
+import CurrencyFormat from 'react-currency-format';
+import ReactPaginate from 'react-paginate';
 
 const { scaleDown } = transitions;
 
@@ -13,9 +17,23 @@ class ShopContainer extends Component {
   constructor(props){
       super(props);
       this.filterSearch = this.filterSearch.bind(this);
-      const paintings = [];
+
       this.state = {
-          paintings: [],
+          mainPainting: {title:"",
+                          artist: {name:""},
+                          medium: {name:""},
+                          width:"",
+                          height:""},
+          paintings: [{
+                        id: 1,
+                        title: "",
+                        url: ""
+                      }],
+          meta: {
+                  total_items: 1,
+                  current_page: 1,
+                  total_pages: 1
+                },
           artists: [],
           prices: [],
           mediums: [],
@@ -29,7 +47,8 @@ class ShopContainer extends Component {
         .then(response => {
             // console.log(response)
             this.setState({
-                paintings: response
+                paintings: response.paintings,
+                meta: response.meta
             })
         })
         .catch(error => console.log(error));
@@ -74,8 +93,19 @@ class ShopContainer extends Component {
         })
         .catch(error => console.log(error));
 
+    fetch('http://localhost:3002/api/v1/shop/random')
+        .then(response => response.json())
+        .then(response => {
+            // console.log(response)
+            this.setState({
+                mainPainting: response
+            })
+        })
+        .catch(error => console.log(error));
+
 
       M.AutoInit();
+
     }
 
     filterSearch(event, title, selected){
@@ -86,19 +116,60 @@ class ShopContainer extends Component {
         paintings: [],
       });
 
-      fetch('http://localhost:3002/api/v1/shop?artist_id=' + selected)
+      // console.log('http://localhost:3002/api/v1/shop?' + title + '_ids=' + selected);
+      fetch('http://localhost:3002/api/v1/shop?artist_id='+ selected)
           .then(response => response.json())
           .then(response => {
-              // console.log(response)
               this.setState({
-                  paintings: response
+                  paintings: response.paintings
               })
           })
           .catch(error => console.log(error));
+      // this.grid.updateLayout();
+    }
+    componentDidUpdate() {
+      // this.grid.updateLayout();
     }
 
+    handlePageClick = data => {
+      let selected = data.selected;
+      console.log(selected+1);
+
+      this.setState({
+        paintings: [],
+      });
+
+      // console.log('http://localhost:3002/api/v1/shop?' + title + '_ids=' + selected);
+      fetch('http://localhost:3002/api/v1/shop?page='+ (selected+1))
+          .then(response => response.json())
+          .then(response => {
+              this.setState({
+                  paintings: response.paintings
+              })
+          })
+          .catch(error => console.log(error));
+
+      // fetch('http://localhost:3002/api/v1/shop/random')
+      //     .then(response => response.json())
+      //     .then(response => {
+      //         // console.log(response)
+      //         this.setState({
+      //             mainPainting: response
+      //         })
+      //     })
+      //     .catch(error => console.log(error));
+
+
+      // let offset = Math.ceil(selected * this.props.perPage);
+      //
+      // this.setState({ offset: offset }, () => {
+      //   this.loadCommentsFromServer();
+      // });
+    };
+
     render() {
-      const { paintings,
+      const { mainPainting,
+              paintings,
               artists,
               prices,
               mediums,
@@ -108,7 +179,8 @@ class ShopContainer extends Component {
       return (
           <div className="">
             <div className="container">
-              <div className="row">
+
+              <div className="row padding-top-15">
                 <div className="col s3">
                   <Dropdown
                     options={artists}
@@ -136,22 +208,40 @@ class ShopContainer extends Component {
               </div>
             </div>
 
+            <div className="row center">
+              <ReactPaginate
+                previousLabel={'previous'}
+                nextLabel={'next'}
+                breakLabel={'...'}
+                breakClassName={'break-me'}
+                pageCount={this.state.meta.total_pages}
+                marginPagesDisplayed={1}
+                pageRangeDisplayed={2}
+                onPageChange={this.handlePageClick}
+                containerClassName={'pagination'}
+                subContainerClassName={'pages pagination'}
+                activeClassName={'active'}
+              />
+            </div>
+
 
             <div className="row">
-              <div className="col s12">
+              <div className="col s4 stack-grid">
               <StackGrid
-              gridRef={grid => this.grid = grid}
-              appear={scaleDown.appear}
-              appeared={scaleDown.appeared}
-              enter={scaleDown.enter}
-              entered={scaleDown.entered}
-              leaved={scaleDown.leaved}
-              // gutterWidth={5}
-              gutterHeight={0}
-              columnWidth={180}
-              monitorImagesLoaded={true}
+                gridRef={grid => this.grid = grid}
+                appear={scaleDown.appear}
+                appeared={scaleDown.appeared}
+                enter={scaleDown.enter}
+                entered={scaleDown.entered}
+                leaved={scaleDown.leaved}
+                gutterWidth={20}
+                gutterHeight={15}
+                columnWidth={180}
+                monitorImagesLoaded={true}
               >
-                {this.state.paintings.map( painting => {
+                {paintings
+                  .filter((i, index) => (index < paintings.length/2))
+                  .map( painting => {
                     return (
                       <Painting
                         painting={painting}
@@ -161,6 +251,71 @@ class ShopContainer extends Component {
               </StackGrid>
               </div>
 
+              <div className="col s4">
+                <div className="main-pic" key={mainPainting.id}>
+                  <div className="card">
+                    <div className="well">
+                      <div className="card-image">
+                        <img alt={mainPainting.title} src={mainPainting.url} target="_blank" />
+                          <a data-id= {mainPainting.id} className="add_to_cart btn-floating halfway-fab waves-effect waves-light red">
+                          <MaterialIcon icon="add_shopping_cart" color='#FAFAFA'/>
+                        </a>
+                      </div>
+                      <div className="card-content">
+                      <div className="card-details">
+                        <div className="card-title">
+                          {mainPainting.title}
+                        </div>
+                        <div className="card-artist">
+                          {mainPainting.artist.name}
+                        </div>
+
+                          <div className="card-medium">
+                            {mainPainting.medium.name}
+                          </div>
+                          <div className="card-dimension">
+                            {mainPainting.weight} x {mainPainting.height}
+                          </div>
+                          <div className="main-pic-price">
+                            <CurrencyFormat
+                              value={mainPainting.price}
+                              displayType={'text'}
+                              thousandSeparator={true}
+                              prefix={'$'} />
+
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col s4 stack-grid">
+              <StackGrid
+                gridRef={grid => this.grid = grid}
+                appear={scaleDown.appear}
+                appeared={scaleDown.appeared}
+                enter={scaleDown.enter}
+                entered={scaleDown.entered}
+                leaved={scaleDown.leaved}
+                gutterWidth={20}
+                gutterHeight={15}
+                columnWidth={180}
+                monitorImagesLoaded={true}
+              >
+                {paintings
+                  .filter((i, index) => (index >= paintings.length/2))
+                  .map( painting => {
+                    return (
+                      <Painting
+                        painting={painting}
+                        key={painting.id} />
+                    )
+                })}
+              </StackGrid>
+              </div>
             </div>
           </div>
 

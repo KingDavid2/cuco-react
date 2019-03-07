@@ -7,13 +7,19 @@ nav {
   background-color: #000;
 }
 
-.row {
+/* .row {
   margin: 0 auto;
 }
 
 .row .col.s4 {
   width: 30.33% !important;
   padding: 0 !important;
+} */
+.stack-grid img{
+  width: 100%;
+}
+.padding-top-15 {
+  padding-top: 15px;
 }
 
 .card {
@@ -25,13 +31,14 @@ nav {
 
 .card .card-content {
   padding: 10px 24px 10px 24px;
+
 }
 
 .card-title{
   margin: 0px;
 }
 .card-details {
-  margin: 0px;
+  margin: 20px 0px 0px 0px;
   padding: 0px;
 }
 .card-artist {

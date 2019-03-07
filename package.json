@@ -10,7 +10,9 @@
     "material-icons-react": "^1.0.4",
     "materialize-css": "^1.0.0",
     "react": "^16.8.3",
+    "react-currency-format": "^1.0.0",
     "react-dom": "^16.8.3",
+    "react-paginate": "^6.3.0",
     "react-scripts": "2.1.5",
     "react-sizeme": "^2.5.2",
     "react-stack-grid": "^0.7.1"

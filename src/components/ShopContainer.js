@@ -127,6 +127,18 @@ class ShopContainer extends Component {
           .catch(error => console.log(error));
       // this.grid.updateLayout();
     }
+
+    selectMainPainting(id){
+      fetch('http://localhost:3002/api/v1/paintings/'+id)
+          .then(response => response.json())
+          .then(response => {
+              this.setState({
+                  mainPainting: response
+              })
+          })
+          .catch(error => console.log(error));
+    }
+
     componentDidUpdate() {
       // this.grid.updateLayout();
     }
@@ -165,7 +177,7 @@ class ShopContainer extends Component {
       // this.setState({ offset: offset }, () => {
       //   this.loadCommentsFromServer();
       // });
-    };
+    }
 
     render() {
       const { mainPainting,
@@ -241,13 +253,13 @@ class ShopContainer extends Component {
               >
                 {paintings
                   .filter((i, index) => (index < paintings.length/2))
-                  .map( painting => {
-                    return (
-                      <Painting
-                        painting={painting}
-                        key={painting.id} />
-                    )
-                })}
+                  .map(painting =>
+                   (<div
+                         key={painting.id}
+                         onClick={() => this.selectMainPainting(painting.id)}>
+                       <img alt={painting.title} src={painting.url} target="_blank" alt={painting.id}/>
+                     </div>)
+                 )}
               </StackGrid>
               </div>
 
@@ -305,15 +317,15 @@ class ShopContainer extends Component {
                 columnWidth={180}
                 monitorImagesLoaded={true}
               >
-                {paintings
-                  .filter((i, index) => (index >= paintings.length/2))
-                  .map( painting => {
-                    return (
-                      <Painting
-                        painting={painting}
-                        key={painting.id} />
-                    )
-                })}
+              {paintings
+                .filter((i, index) => (index < paintings.length/2))
+                .map(painting =>
+                 (<div
+                       key={painting.id}
+                       onClick={() => this.selectMainPainting(painting.id)}>
+                     <img alt={painting.title} src={painting.url} target="_blank" alt={painting.id}/>
+                   </div>)
+               )}
               </StackGrid>
               </div>
             </div>

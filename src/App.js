@@ -1,23 +1,33 @@
 import React, { Component } from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect,
-  withRouter
-} from "react-router-dom";
+
 import './App.css';
 // import 'materialize-css/dist/css/materialize.min.css'
 
 import MainNav from './components/MainNav'
-import ShopContainer from './components/ShopContainer';
+import Shop from './components/Shop';
+import Checkout from './components/Checkout';
+
+import {
+  BrowserRouter,
+  Route,
+  Switch
+} from "react-router-dom";
 
 class App extends Component {
+
+
   render() {
     return (
       <div className="App">
-        <MainNav />
-        <ShopContainer />
+        <BrowserRouter>
+          <div>
+            <MainNav />
+            <Switch>
+              <Route exact path="/" component={Shop} />
+              <Route path="/checkout" component={Checkout} />
+            </Switch>
+          </div>
+        </BrowserRouter>
       </div>
     );
   }

@@ -12,7 +12,7 @@ import ReactPaginate from 'react-paginate';
 
 const { scaleDown } = transitions;
 
-class ShopContainer extends Component {
+class Shop extends Component {
 
   constructor(props){
       super(props);
@@ -336,4 +336,4 @@ class ShopContainer extends Component {
     }
 }
 
-export default ShopContainer;
+export default Shop;

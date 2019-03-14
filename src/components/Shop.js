@@ -106,42 +106,42 @@ class Shop extends Component {
 
       M.AutoInit();
 
-    }
+  }
 
-    filterSearch(event, title, selected){
-      event.preventDefault();
-      console.log(selected);
+  filterSearch(event, title, selected){
+    event.preventDefault();
+    console.log(selected);
 
-      this.setState({
-        paintings: [],
-      });
+    this.setState({
+      paintings: [],
+    });
 
-      // console.log('http://localhost:3002/api/v1/shop?' + title + '_ids=' + selected);
-      fetch('http://localhost:3002/api/v1/shop?artist_id='+ selected)
-          .then(response => response.json())
-          .then(response => {
-              this.setState({
-                  paintings: response.paintings
-              })
-          })
-          .catch(error => console.log(error));
-      // this.grid.updateLayout();
-    }
+    // console.log('http://localhost:3002/api/v1/shop?' + title + '_ids=' + selected);
+    fetch('http://localhost:3002/api/v1/shop?artist_id='+ selected)
+        .then(response => response.json())
+        .then(response => {
+            this.setState({
+                paintings: response.paintings
+            })
+        })
+        .catch(error => console.log(error));
+    // this.grid.updateLayout();
+  }
 
-    selectMainPainting(id){
-      fetch('http://localhost:3002/api/v1/paintings/'+id)
-          .then(response => response.json())
-          .then(response => {
-              this.setState({
-                  mainPainting: response
-              })
-          })
-          .catch(error => console.log(error));
-    }
+  selectMainPainting(id){
+    fetch('http://localhost:3002/api/v1/paintings/'+id)
+        .then(response => response.json())
+        .then(response => {
+            this.setState({
+                mainPainting: response
+            })
+        })
+        .catch(error => console.log(error));
+  }
 
-    componentDidUpdate() {
-      // this.grid.updateLayout();
-    }
+  componentDidUpdate() {
+    // this.grid.updateLayout();
+  }
 
     handlePageClick = data => {
       let selected = data.selected;
@@ -269,9 +269,11 @@ class Shop extends Component {
                     <div className="well">
                       <div className="card-image">
                         <img alt={mainPainting.title} src={mainPainting.url} target="_blank" />
-                          <a data-id= {mainPainting.id} className="add_to_cart btn-floating halfway-fab waves-effect waves-light red">
-                          <MaterialIcon icon="add_shopping_cart" color='#FAFAFA'/>
-                        </a>
+                          <div data-id= {mainPainting.id}
+                             className="add_to_cart btn-floating halfway-fab waves-effect waves-light red"
+                             onClick={() => this.addToCheckout(mainPainting)}>
+                            <MaterialIcon icon="add_shopping_cart" color='#FAFAFA'/>
+                          </div>
                       </div>
                       <div className="card-content">
                       <div className="card-details">

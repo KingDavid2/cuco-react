@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
-import MaterialIcon, {colorPalette} from 'material-icons-react';
 
 class MainNav extends Component {
-
+  constructor(props){
+      super(props)
+  }
+  
   render() {
     return (
       <nav>
@@ -16,10 +18,12 @@ class MainNav extends Component {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/checkout" className="shopping_cart_with_badge">
+                <NavLink to="/checkout"
+                         className="shopping_cart_with_badge"
+                         >
                   <i className="material-icons">shopping_cart</i>
                     <span className="new badge red">
-                        123
+                        {this.props.paintings.lenght}
                     </span>
                 </NavLink>
               </li>

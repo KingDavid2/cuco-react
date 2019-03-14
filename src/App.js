@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 
 import './App.css';
-// import 'materialize-css/dist/css/materialize.min.css'
-
 import MainNav from './components/MainNav'
 import Shop from './components/Shop';
 import Checkout from './components/Checkout';
+import MaterialIcon, {colorPalette} from 'material-icons-react';
 
 import {
   BrowserRouter,
@@ -15,6 +14,9 @@ import {
 
 class App extends Component {
 
+  constructor(props){
+      super(props);
+  }
 
   render() {
     return (

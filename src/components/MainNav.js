@@ -5,7 +5,7 @@ class MainNav extends Component {
   constructor(props){
       super(props)
   }
-  
+
   render() {
     return (
       <nav>
@@ -23,7 +23,7 @@ class MainNav extends Component {
                          >
                   <i className="material-icons">shopping_cart</i>
                     <span className="new badge red">
-                        {this.props.paintings.lenght}
+                        123
                     </span>
                 </NavLink>
               </li>

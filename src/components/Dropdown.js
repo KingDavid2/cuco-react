@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import M from 'materialize-css/dist/js/materialize.min.js'
 
 class Dropdown extends Component {
   constructor(props){
@@ -12,14 +11,11 @@ class Dropdown extends Component {
 
   }
   componentDidUpdate(){
-      var elems = document.querySelectorAll('select');
-      var instances = M.FormSelect.init(elems);
+
   }
 
   changeFilter = (event) => {
-    var instance = M.FormSelect.getInstance(event.target);
-    this.setState({ value: instance.getSelectedValues() });
-    this.props.filterSearch(event, this.props.title, instance.getSelectedValues());
+
   }
 
   render() {

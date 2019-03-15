@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import M from 'materialize-css/dist/js/materialize.min.js'
-// import axios from 'axios';
 import Painting from './Painting';
 import Dropdown from './Dropdown';
 import APIClient from '../api/client.js'
 import StackGrid, { transitions } from "react-stack-grid";
-import _ from 'lodash';
+
 import MaterialIcon, {colorPalette} from 'material-icons-react';
 import CurrencyFormat from 'react-currency-format';
 import ReactPaginate from 'react-paginate';
@@ -102,9 +100,6 @@ class Shop extends Component {
             })
         })
         .catch(error => console.log(error));
-
-
-      M.AutoInit();
 
   }
 

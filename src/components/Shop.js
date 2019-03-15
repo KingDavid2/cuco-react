@@ -8,6 +8,11 @@ import MaterialIcon, {colorPalette} from 'material-icons-react';
 import CurrencyFormat from 'react-currency-format';
 import ReactPaginate from 'react-paginate';
 
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+
 const { scaleDown } = transitions;
 
 class Shop extends Component {
@@ -103,8 +108,7 @@ class Shop extends Component {
 
   }
 
-  filterSearch(event, title, selected){
-    event.preventDefault();
+  filterSearch(title, selected){
     console.log(selected);
 
     this.setState({
@@ -112,7 +116,8 @@ class Shop extends Component {
     });
 
     // console.log('http://localhost:3002/api/v1/shop?' + title + '_ids=' + selected);
-    fetch('http://localhost:3002/api/v1/shop?artist_id='+ selected)
+    console.log(title);
+    fetch('http://localhost:3002/api/v1/shop?'+ title +'='+ selected)
         .then(response => response.json())
         .then(response => {
             this.setState({
@@ -182,38 +187,39 @@ class Shop extends Component {
               mediums,
               sizes,
               } = this.state;
+      const { classes } = this.props;
 
       return (
           <div className="">
-            <div className="container">
-
-              <div className="row padding-top-15">
-                <div className="col s3">
+            <Grid container spacing={0}
+              direction="row"
+              alignItems="center"
+              justify="center">
+              <Grid item justify="center" xs>
                   <Dropdown
                     options={artists}
                     title='Artists'
                     filterSearch={this.filterSearch}/>
-                </div>
-                <div className="col s3">
+              </Grid>
+              <Grid item xs>
                   <Dropdown
                     options={prices}
                     title='Prices'
                     filterSearch={this.filterSearch}/>
-                </div>
-                <div className="col s3">
+              </Grid>
+              <Grid item xs>
                   <Dropdown
                     options={mediums}
                     title='Mediums'
                     filterSearch={this.filterSearch}/>
-                </div>
-                <div className="col s3">
-                  <Dropdown
-                    options={sizes}
-                    title='Sizes'
-                    filterSearch={this.filterSearch}/>
-                </div>
-              </div>
-            </div>
+              </Grid>
+              <Grid item xs>
+                <Dropdown
+                  options={sizes}
+                  title='Sizes'
+                  filterSearch={this.filterSearch}/>
+              </Grid>
+            </Grid>
 
             <div className="row center">
               <ReactPaginate
@@ -333,4 +339,21 @@ class Shop extends Component {
     }
 }
 
-export default Shop;
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+    textAlign: 'center',
+  },
+  paper: {
+    textAlign: 'center',
+  },
+  grid: {
+
+  }
+});
+
+Shop.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(Shop);

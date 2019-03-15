@@ -5,6 +5,7 @@ import MainNav from './components/MainNav'
 import Shop from './components/Shop';
 import Checkout from './components/Checkout';
 import MaterialIcon, {colorPalette} from 'material-icons-react';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 import {
   BrowserRouter,
@@ -21,6 +22,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+      <CssBaseline />
         <BrowserRouter>
           <div>
             <MainNav />

@@ -9,11 +9,17 @@ import CurrencyFormat from 'react-currency-format';
 import ReactPaginate from 'react-paginate';
 
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
+import ReactDOM from "react-dom";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Pagination from "material-ui-flat-pagination";
+
 const { scaleDown } = transitions;
+
+const themes = createMuiTheme();
 
 class Shop extends Component {
 
@@ -35,7 +41,8 @@ class Shop extends Component {
           meta: {
                   total_items: 1,
                   current_page: 1,
-                  total_pages: 1
+                  total_pages: 1,
+                  offset: 0
                 },
           artists: [],
           prices: [],
@@ -121,7 +128,8 @@ class Shop extends Component {
         .then(response => response.json())
         .then(response => {
             this.setState({
-                paintings: response.paintings
+                paintings: response.paintings,
+                meta: response.meta
             })
         })
         .catch(error => console.log(error));
@@ -143,20 +151,20 @@ class Shop extends Component {
     // this.grid.updateLayout();
   }
 
-    handlePageClick = data => {
-      let selected = data.selected;
-      console.log(selected+1);
-
+    handlePageClick = (offset, page) => {
+      let selected = page;
+      console.log(selected);
       this.setState({
         paintings: [],
       });
 
       // console.log('http://localhost:3002/api/v1/shop?' + title + '_ids=' + selected);
-      fetch('http://localhost:3002/api/v1/shop?page='+ (selected+1))
+      fetch('http://localhost:3002/api/v1/shop?page='+ (selected))
           .then(response => response.json())
           .then(response => {
               this.setState({
-                  paintings: response.paintings
+                  paintings: response.paintings,
+                  meta: response.meta
               })
           })
           .catch(error => console.log(error));
@@ -225,22 +233,21 @@ class Shop extends Component {
             </Grid>
           </Grid>
 
-            <div className="row center">
-              <ReactPaginate
-                previousLabel={'previous'}
-                nextLabel={'next'}
-                breakLabel={'...'}
-                breakClassName={'break-me'}
-                pageCount={this.state.meta.total_pages}
-                marginPagesDisplayed={1}
-                pageRangeDisplayed={2}
-                onPageChange={this.handlePageClick}
-                containerClassName={'pagination'}
-                subContainerClassName={'pages pagination'}
-                activeClassName={'active'}
+          <Grid container justify='center'
+            className={classes.paginationContainer}
+                        >
+            <MuiThemeProvider theme={themes}>
+              <CssBaseline />
+              <Pagination
+                limit={26}
+                offset={this.state.meta.offset}
+                total={this.state.meta.total_items}
+                onClick={(e, offset, page) => this.handlePageClick(offset, page)}
               />
-            </div>
+            </MuiThemeProvider>
+          </Grid>
 
+          
 
             <div className="row">
               <div className="col s4 stack-grid">
@@ -349,6 +356,9 @@ const styles = theme => ({
     [theme.breakpoints.up("lg")]: {
       width: 1170
     }
+  },
+  paginationContainer:{
+    height: 50
   }
 });
 

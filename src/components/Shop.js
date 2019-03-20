@@ -191,11 +191,14 @@ class Shop extends Component {
 
       return (
           <div className="">
-            <Grid container spacing={0}
+          <Grid container justify='center'>
+            <Grid container
+              className={classes.dropDownContainer}
+              spacing={16}
               direction="row"
               alignItems="center"
               justify="center">
-              <Grid item justify="center" xs>
+              <Grid item xs>
                   <Dropdown
                     options={artists}
                     title='Artists'
@@ -220,6 +223,7 @@ class Shop extends Component {
                   filterSearch={this.filterSearch}/>
               </Grid>
             </Grid>
+          </Grid>
 
             <div className="row center">
               <ReactPaginate
@@ -340,15 +344,11 @@ class Shop extends Component {
 }
 
 const styles = theme => ({
-  root: {
-    flexGrow: 1,
-    textAlign: 'center',
-  },
-  paper: {
-    textAlign: 'center',
-  },
-  grid: {
-
+  dropDownContainer: {
+    height: 100,
+    [theme.breakpoints.up("lg")]: {
+      width: 1170
+    }
   }
 });
 

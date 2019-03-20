@@ -31,7 +31,9 @@ class Dropdown extends Component {
 
   render() {
     return (
-      <FormControl >
+      <FormControl 
+      fullWidth={true}
+      display={'flex'}>
         <InputLabel htmlFor="select-multiple-checkbox">{this.props.title}</InputLabel>
         <Select
           multiple

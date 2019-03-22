@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import ShoppingCart from '@material-ui/icons/ShoppingCart';
+import store from '../store';
 
 const styles = theme => ({
   root: {
@@ -20,20 +21,41 @@ const styles = theme => ({
 });
 
 class MainNav extends Component {
+  constructor(){
+    super();
+
+    this.state = {
+      cart: []
+    }
+
+    store.subscribe(() => {
+      this.setState({
+        cart: store.getState().cart
+      })
+    });
+  }
+  
+  componentDidMount(){
+
+  }
   render() {
     const { classes } = this.props;
     return (
       <AppBar position = 'static'>
         <Toolbar>
           <Typography variant = 'title' color='inherit'>
-            Cuco
+            <NavLink to = '/'>
+                Cuco
+            </NavLink>
           </Typography>
           <div className={classes.grow} />
           <IconButton color="inherit">
-                <Badge badgeContent={4} color="secondary">
-                  <ShoppingCart />
-                </Badge>
-              </IconButton>
+            <NavLink to = '/checkout'>
+              <Badge badgeContent={this.state.cart.length} color="secondary">
+                <ShoppingCart />
+              </Badge>
+            </NavLink>
+          </IconButton>           
           <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>

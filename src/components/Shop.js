@@ -17,6 +17,9 @@ import ReactDOM from "react-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Pagination from "material-ui-flat-pagination";
 
+import store from '../store'
+
+
 const { scaleDown } = transitions;
 
 const themes = createMuiTheme();
@@ -26,6 +29,7 @@ class Shop extends Component {
   constructor(props){
       super(props);
       this.filterSearch = this.filterSearch.bind(this);
+      this.addToCart = this.addToCart.bind(this);
 
       this.state = {
           mainPainting: {title:"",
@@ -113,6 +117,13 @@ class Shop extends Component {
         })
         .catch(error => console.log(error));
 
+  }
+
+  addToCart(product) {
+    store.dispatch({
+      type: "ADD_TO_CART",
+      product: product
+    })
   }
 
   filterSearch(title, selected){
@@ -283,7 +294,7 @@ class Shop extends Component {
                         <img alt={mainPainting.title} src={mainPainting.url} target="_blank" />
                           <div data-id= {mainPainting.id}
                              className="add_to_cart btn-floating halfway-fab waves-effect waves-light red"
-                             onClick={() => this.addToCheckout(mainPainting)}>
+                             onClick={() => this.addToCart(mainPainting)}>
                             <MaterialIcon icon="add_shopping_cart" color='#FAFAFA'/>
                           </div>
                       </div>

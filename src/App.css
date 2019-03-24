@@ -3,7 +3,7 @@ input{
   /* font-family:'montserrat-regular'; */
 }
 
-#container{
+/* #container{
   height: 100%;
   width: 100%;
   overflow: hidden;
@@ -19,7 +19,7 @@ input{
 html, body{
   height: 99%;
   overflow:hidden;
-}
+} */
 
 nav {
   background-color: #000;

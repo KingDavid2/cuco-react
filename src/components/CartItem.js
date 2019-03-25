@@ -31,7 +31,7 @@ const styles = theme => ({
   },
 });
 
-class CheckoutItem extends Component {
+class CartItem extends Component {
 
     constructor(props){
         super(props);
@@ -99,4 +99,4 @@ class CheckoutItem extends Component {
     }
 }
 
-export default withStyles(styles)(CheckoutItem);
+export default withStyles(styles)(CartItem);

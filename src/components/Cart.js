@@ -6,6 +6,8 @@ import Grid from '@material-ui/core/Grid';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
+import Typography from '@material-ui/core/Typography';
+
 
 const styles = theme => ({
   root: {
@@ -70,6 +72,9 @@ class Checkout extends Component {
   render() {
     return (
       <div className="" style={{ padding: 10 }}>
+      <Typography variant="h5" gutterBottom>
+        Cart
+      </Typography>
         <Grid container
         justify='center'
         >

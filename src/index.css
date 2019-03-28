@@ -12,3 +12,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.shipping-text input {
+  border:none!important;
+  box-shadow: none!important;
+  outline: none!important;
+  background: none!important;
+  margin-bottom: 0 !important;
+}
+.shipping-text input:focus {
+  border:none!important;
+  box-shadow: none!important;
+  outline: none!important;
+  background: none!important;
+  margin-bottom: 0 !important;
+}

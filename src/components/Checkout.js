@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Cart from './Cart';
+import Shipping from './Shipping';
 
 const styles = theme => ({
   root: {
@@ -23,7 +24,7 @@ const styles = theme => ({
 });
 
 function getSteps() {
-  return ['Cart', 'Checkout', 'Review'];
+  return ['Cart', 'Shipping', 'Review'];
 }
 
 function getStepContent(step) {
@@ -31,7 +32,7 @@ function getStepContent(step) {
     case 0:
       return <Cart/>;
     case 1:
-      return 'What is an ad group anyways?';
+      return <Shipping/>;
     case 2:
       return 'This is the bit I really care about!';
     default:
@@ -130,6 +131,7 @@ class HorizontalLinearStepper extends React.Component {
           })}
         </Stepper>
         <div>
+          
           {activeStep === steps.length ? (
             <div>
               <Typography className={classes.instructions}>
@@ -143,6 +145,9 @@ class HorizontalLinearStepper extends React.Component {
             <div>
               <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
               <div>
+              <Grid container
+              justify='center'
+              >
                 <Button
                   disabled={activeStep === 0}
                   onClick={this.handleBack}
@@ -168,6 +173,7 @@ class HorizontalLinearStepper extends React.Component {
                 >
                   {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                 </Button>
+                </Grid>
               </div>
             </div>
           )}

@@ -13,6 +13,7 @@
     "material-ui-flat-pagination": "^3.2.0",
     "materialui-pagination": "0.0.6",
     "react": "^16.8.3",
+    "react-addons-css-transition-group": "^15.6.2",
     "react-currency-format": "^1.0.0",
     "react-dom": "^16.8.3",
     "react-paginate": "^6.3.0",
@@ -22,6 +23,7 @@
     "react-sizeme": "^2.5.2",
     "react-stack-grid": "^0.7.1",
     "redux": "^4.0.1",
+    "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0"
   },
   "scripts": {

@@ -16,6 +16,7 @@ import Grid from '@material-ui/core/Grid';
 import ReactDOM from "react-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Pagination from "material-ui-flat-pagination";
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import store from '../store'
 
@@ -32,6 +33,7 @@ class Shop extends Component {
       this.addToCart = this.addToCart.bind(this);
 
       this.state = {
+        mainPaintingVisible: true,
           mainPainting: {title:"",
                           artist: {name:""},
                           medium: {name:""},
@@ -51,7 +53,8 @@ class Shop extends Component {
           artists: [],
           prices: [],
           mediums: [],
-          sizes: []
+          sizes: [],
+          grid: []
       }
   }
 
@@ -162,6 +165,11 @@ class Shop extends Component {
     // this.grid.updateLayout();
   }
 
+  componentWillUpdate() {
+    // this.grid.updateLayout();
+  }
+
+
     handlePageClick = (offset, page) => {
       let selected = page;
       console.log(selected);
@@ -179,23 +187,6 @@ class Shop extends Component {
               })
           })
           .catch(error => console.log(error));
-
-      // fetch('http://localhost:3002/api/v1/shop/random')
-      //     .then(response => response.json())
-      //     .then(response => {
-      //         // console.log(response)
-      //         this.setState({
-      //             mainPainting: response
-      //         })
-      //     })
-      //     .catch(error => console.log(error));
-
-
-      // let offset = Math.ceil(selected * this.props.perPage);
-      //
-      // this.setState({ offset: offset }, () => {
-      //   this.loadCommentsFromServer();
-      // });
     }
 
     render() {
@@ -205,6 +196,7 @@ class Shop extends Component {
               prices,
               mediums,
               sizes,
+              grid,
               } = this.state;
       const { classes } = this.props;
 
@@ -221,7 +213,8 @@ class Shop extends Component {
                   <Dropdown
                     options={artists}
                     title='Artists'
-                    filterSearch={this.filterSearch}/>
+                    filterSearch={this.filterSearch}
+                    />
               </Grid>
               <Grid item xs>
                   <Dropdown
@@ -263,7 +256,7 @@ class Shop extends Component {
             <div className="row">
               <div className="col s4 stack-grid">
               <StackGrid
-                gridRef={grid => this.grid = grid}
+                gridRef={grid => this.state.grid[0] = grid}
                 appear={scaleDown.appear}
                 appeared={scaleDown.appeared}
                 enter={scaleDown.enter}
@@ -273,20 +266,30 @@ class Shop extends Component {
                 gutterHeight={15}
                 columnWidth={180}
                 monitorImagesLoaded={true}
+                duration={500}
               >
                 {paintings
                   .filter((i, index) => (index < paintings.length/2))
                   .map(painting =>
-                   (<div
+                   (
+                   <div 
                          key={painting.id}
                          onClick={() => this.selectMainPainting(painting.id)}>
+                         
                        <img alt={painting.title} src={painting.url} target="_blank" alt={painting.id}/>
-                     </div>)
+                     
+                     </div>
+                     )
                  )}
               </StackGrid>
               </div>
+              <div className='col s4'>
+              <ReactCSSTransitionGroup
+                    transitionName="fade"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={500}>
 
-              <div className="col s4">
+              
                 <div className="main-pic" key={mainPainting.id}>
                   <div className="card">
                     <div className="well">
@@ -327,11 +330,13 @@ class Shop extends Component {
                     </div>
                   </div>
                 </div>
+              
+              </ReactCSSTransitionGroup>
               </div>
 
               <div className="col s4 stack-grid">
               <StackGrid
-                gridRef={grid => this.grid = grid}
+                gridRef={grid => this.state.grid[1] = grid}
                 appear={scaleDown.appear}
                 appeared={scaleDown.appeared}
                 enter={scaleDown.enter}

@@ -51,7 +51,7 @@ class MainNav extends Component {
           <div className={classes.grow} />
           <IconButton color="inherit">
             <NavLink to = '/checkout'>
-              <Badge badgeContent={this.state.cart.length} color="secondary">
+              <Badge badgeContent={store.getState().cart.length} color="secondary">
                 <ShoppingCart />
               </Badge>
             </NavLink>

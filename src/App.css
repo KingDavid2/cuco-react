@@ -125,3 +125,26 @@ nav {
   -moz-border-radius: 9px;
   border-radius: 9px;
 }
+
+
+
+
+.fade-enter {
+  opacity: 0.01;
+}
+
+.fade-enter.fade-enter-active {
+  position: absolute;
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.fade-leave {
+  opacity: 1;
+}
+
+.fade-leave.fade-leave-active {
+  position: absolute;
+  opacity: 0.01;
+  transition: opacity 500ms ease-in;
+}

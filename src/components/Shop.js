@@ -29,7 +29,7 @@ class Shop extends Component {
 
   constructor(props){
       super(props);
-      this.filterSearch = this.filterSearch.bind(this);
+      // this.filterSearch = this.filterSearch.bind(this);
       this.addToCart = this.addToCart.bind(this);
 
       this.state = {
@@ -129,7 +129,9 @@ class Shop extends Component {
     })
   }
 
-  filterSearch(title, selected){
+  // filterSearch(title, selected){
+    filterSearch = (title, selected) => {
+
     console.log(selected);
 
     this.setState({
@@ -142,6 +144,7 @@ class Shop extends Component {
         .then(response => response.json())
         .then(response => {
             this.setState({
+
                 paintings: response.paintings,
                 meta: response.meta
             })
@@ -266,7 +269,7 @@ class Shop extends Component {
                 gutterHeight={15}
                 columnWidth={180}
                 monitorImagesLoaded={true}
-                duration={500}
+                // duration={200}
               >
                 {paintings
                   .filter((i, index) => (index < paintings.length/2))

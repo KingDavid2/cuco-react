@@ -32,8 +32,11 @@ const styles = theme => ({
 });
 
 class Shipping extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
+
+
+    this.handleChange = this.handleChange.bind(this);
 
   }
 
@@ -46,10 +49,15 @@ class Shipping extends Component {
   componentWillUnmount(){
   }
 
-  handleChange = name => event => {
-    this.setState({ [name]: event.target.value });
-  };
+  // handleChange = event => {
+  //   this.setState({ [event.target.name]: event.target.value });
+  //   console.log(event.target.value);
+  // };
 
+  handleChange(e){
+    // debugger
+    this.props.handleChange(e.target.name, e.target.value);
+  }
 
   render() {
     const { classes } = this.props;
@@ -74,6 +82,10 @@ class Shipping extends Component {
               required
               id="standard-required"
               label="First Name"
+              // onChange={(e) => {this.handleChange(e)}}
+              onChange={this.handleChange}
+              name='first_name'
+              defaultValue='test'
               className={classes.textField + ' shipping-text'}
             />
           </Grid>
@@ -84,6 +96,8 @@ class Shipping extends Component {
               required
               id="standard-required"
               label="Last Name"
+              onChange={this.handleChange}
+              name='last_name'
               className={classes.textField + ' shipping-text'}
             />
           </Grid>
@@ -95,6 +109,8 @@ class Shipping extends Component {
               required
               id="standard-required"
               label="Address"
+              onChange={this.handleChange}
+              name='address'
               className={classes.textField + ' shipping-text'}
             />
           </Grid>
@@ -105,6 +121,8 @@ class Shipping extends Component {
               required
               id="standard-required"
               label="Address 2"
+              onChange={this.handleChange}
+              name='address2'
               className={classes.textField + ' shipping-text'}
             />
           </Grid>
@@ -116,6 +134,8 @@ class Shipping extends Component {
               required
               id="standard-required"
               label="Country"
+              onChange={this.handleChange}
+              name='country'
               className={classes.textField + ' shipping-text'}
             />
           </Grid>
@@ -126,6 +146,8 @@ class Shipping extends Component {
               required
               id="standard-required"
               label="City"
+              onChange={this.handleChange}
+              name='city'
               className={classes.textField + ' shipping-text'}
             />
           </Grid>
@@ -137,6 +159,8 @@ class Shipping extends Component {
               required
               id="standard-required"
               label="State"
+              onChange={this.handleChange}
+              name='state'
               className={classes.textField + ' shipping-text'}
             />
           </Grid>
@@ -147,6 +171,8 @@ class Shipping extends Component {
               required
               id="standard-required"
               label="Zip / Postal Code"
+              onChange={this.handleChange}
+              name='postal_code'
               className={classes.textField + ' shipping-text'}
             />
           </Grid>
@@ -158,6 +184,8 @@ class Shipping extends Component {
               required
               id="standard-required"
               label="Phone"
+              onChange={this.handleChange}
+              name='phone'
               className={classes.textField + ' shipping-text'}
             />
           </Grid>
@@ -168,6 +196,8 @@ class Shipping extends Component {
               required
               id="standard-required"
               label="Email Address"
+              onChange={this.handleChange}
+              name='email'
               className={classes.textField + ' shipping-text'}
             />
           </Grid>

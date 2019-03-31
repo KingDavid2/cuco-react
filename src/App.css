@@ -136,7 +136,7 @@ nav {
 .fade-enter.fade-enter-active {
   position: absolute;
   opacity: 1;
-  transition: opacity 500ms ease-in;
+  transition: opacity 200ms ease-in;
 }
 
 .fade-leave {
@@ -146,5 +146,5 @@ nav {
 .fade-leave.fade-leave-active {
   position: absolute;
   opacity: 0.01;
-  transition: opacity 500ms ease-in;
+  transition: opacity 200ms ease-in;
 }

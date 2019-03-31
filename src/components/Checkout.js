@@ -27,23 +27,44 @@ function getSteps() {
   return ['Cart', 'Shipping', 'Review'];
 }
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <Cart/>;
-    case 1:
-      return <Shipping/>;
-    case 2:
-      return 'This is the bit I really care about!';
-    default:
-      return 'Unknown step';
-  }
-}
+// function getStepContent(step) {
+//   switch (step) {
+//     case 0:
+//       return <Cart
+//               handleChange={this.handleChange}
+//               />;
+//     case 1:
+//       return <Shipping/>;
+//     case 2:
+//       return 'This is the bit I really care about!';
+//     default:
+//       return 'Unknown step';
+//   }
+// }
 
 class HorizontalLinearStepper extends React.Component {
+
+  constructor(props){
+    super(props);
+
+
+    this.handleChange = this.handleChange.bind(this);
+
+  }
+
   state = {
     activeStep: 0,
     skipped: new Set(),
+    first_name: '',
+    last_name: '',
+    address1: '',
+    address2: '',
+    country: '',
+    state: '',
+    city: '',
+    postal_code: '',
+    phone: '',
+    email: '',
   };
 
   isStepOptional = step => step === 3;
@@ -93,7 +114,35 @@ class HorizontalLinearStepper extends React.Component {
 
   isStepSkipped(step) {
     return this.state.skipped.has(step);
+  };
+
+  // handleChange = input => e => {
+  //   this.setState({ [input]: e.target.value });
+  //   console.log(e.target.value)
+  // };
+
+  handleChange(name, value){
+    // this.handleChange(e.value);
+    console.log(name);
+    console.log(value)
   }
+
+  getStepContent(step) {
+    switch (step) {
+      case 0:
+        return <Cart
+                
+                />;
+      case 1:
+        return <Shipping
+                handleChange={this.handleChange}
+                />;
+      case 2:
+        return 'This is the bit I really care about!';
+      default:
+        return 'Unknown step';
+    }
+  };
 
   render() {
     const { classes } = this.props;
@@ -143,7 +192,7 @@ class HorizontalLinearStepper extends React.Component {
             </div>
           ) : (
             <div>
-              <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+              <Typography className={classes.instructions}>{this.getStepContent(activeStep)}</Typography>
               <div>
               <Grid container
               justify='center'

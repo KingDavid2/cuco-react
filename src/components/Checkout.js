@@ -9,6 +9,10 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Cart from './Cart';
 import Shipping from './Shipping';
+import Review from './Review';
+import Payment from './Payment';
+import store from '../store';
+
 
 const styles = theme => ({
   root: {
@@ -67,7 +71,7 @@ class HorizontalLinearStepper extends React.Component {
     email: '',
   };
 
-  isStepOptional = step => step === 3;
+  isStepOptional = step => step === 10;
 
   handleNext = () => {
     const { activeStep } = this.state;
@@ -122,12 +126,10 @@ class HorizontalLinearStepper extends React.Component {
   // };
 
   handleChange(name, value){
-    // this.handleChange(e.value);
-    console.log(name);
-    console.log(value)
+    this.setState({ [name]: value });
   }
 
-  getStepContent(step) {
+  getStepContent(step, values) {
     switch (step) {
       case 0:
         return <Cart
@@ -136,9 +138,17 @@ class HorizontalLinearStepper extends React.Component {
       case 1:
         return <Shipping
                 handleChange={this.handleChange}
+                values={values}
                 />;
       case 2:
-        return 'This is the bit I really care about!';
+        return <Review
+                values={values}
+                />;
+
+      // case 3:
+      //   return <Payment
+      //           />;
+
       default:
         return 'Unknown step';
     }
@@ -148,6 +158,8 @@ class HorizontalLinearStepper extends React.Component {
     const { classes } = this.props;
     const steps = getSteps();
     const { activeStep } = this.state;
+    const { first_name, last_name, address1, address2, country, state, city, postal_code, phone, email } = this.state;
+    const values = { first_name, last_name, address1, address2, country, state, city, postal_code, phone, email };
 
     return (
       <div className={classes.root}>
@@ -184,15 +196,15 @@ class HorizontalLinearStepper extends React.Component {
           {activeStep === steps.length ? (
             <div>
               <Typography className={classes.instructions}>
-                All steps completed - you&apos;re finished
+                {/* All steps completed - you&apos;re finished */}
               </Typography>
-              <Button onClick={this.handleReset} className={classes.button}>
-                Reset
-              </Button>
+              <Payment
+                />
             </div>
-          ) : (
+          ) : 
+          (
             <div>
-              <Typography className={classes.instructions}>{this.getStepContent(activeStep)}</Typography>
+              <Typography className={classes.instructions}>{this.getStepContent(activeStep, values)}</Typography>
               <div>
               <Grid container
               justify='center'

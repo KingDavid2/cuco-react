@@ -60,9 +60,10 @@ class Shipping extends Component {
   }
 
   render() {
-    const { classes } = this.props;
-
+    const { classes, values } = this.props;
+    
     return (
+      
       <div className="" style={{ padding: 10 }}>
         <Typography variant="h5" gutterBottom>
           Shipping Address
@@ -85,7 +86,7 @@ class Shipping extends Component {
               // onChange={(e) => {this.handleChange(e)}}
               onChange={this.handleChange}
               name='first_name'
-              defaultValue='test'
+              defaultValue={values.first_name}
               className={classes.textField + ' shipping-text'}
             />
           </Grid>
@@ -98,6 +99,7 @@ class Shipping extends Component {
               label="Last Name"
               onChange={this.handleChange}
               name='last_name'
+              defaultValue={values.last_name}
               className={classes.textField + ' shipping-text'}
             />
           </Grid>
@@ -111,6 +113,7 @@ class Shipping extends Component {
               label="Address"
               onChange={this.handleChange}
               name='address'
+              defaultValue={values.address}
               className={classes.textField + ' shipping-text'}
             />
           </Grid>
@@ -123,6 +126,7 @@ class Shipping extends Component {
               label="Address 2"
               onChange={this.handleChange}
               name='address2'
+              defaultValue={values.address2}
               className={classes.textField + ' shipping-text'}
             />
           </Grid>
@@ -136,6 +140,7 @@ class Shipping extends Component {
               label="Country"
               onChange={this.handleChange}
               name='country'
+              defaultValue={values.country}
               className={classes.textField + ' shipping-text'}
             />
           </Grid>
@@ -148,6 +153,7 @@ class Shipping extends Component {
               label="City"
               onChange={this.handleChange}
               name='city'
+              defaultValue={values.city}
               className={classes.textField + ' shipping-text'}
             />
           </Grid>
@@ -161,6 +167,7 @@ class Shipping extends Component {
               label="State"
               onChange={this.handleChange}
               name='state'
+              defaultValue={values.state}
               className={classes.textField + ' shipping-text'}
             />
           </Grid>
@@ -173,6 +180,7 @@ class Shipping extends Component {
               label="Zip / Postal Code"
               onChange={this.handleChange}
               name='postal_code'
+              defaultValue={values.postal_code}
               className={classes.textField + ' shipping-text'}
             />
           </Grid>
@@ -186,6 +194,7 @@ class Shipping extends Component {
               label="Phone"
               onChange={this.handleChange}
               name='phone'
+              defaultValue={values.phone}
               className={classes.textField + ' shipping-text'}
             />
           </Grid>
@@ -198,6 +207,7 @@ class Shipping extends Component {
               label="Email Address"
               onChange={this.handleChange}
               name='email'
+              defaultValue={values.email}
               className={classes.textField + ' shipping-text'}
             />
           </Grid>

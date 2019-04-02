@@ -14,6 +14,7 @@
     "materialui-pagination": "0.0.6",
     "react": "^16.8.3",
     "react-addons-css-transition-group": "^15.6.2",
+    "react-countdown-now": "^2.1.0",
     "react-currency-format": "^1.0.0",
     "react-dom": "^16.8.3",
     "react-paginate": "^6.3.0",

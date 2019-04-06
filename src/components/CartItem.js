@@ -8,6 +8,8 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import MaterialIcon, {colorPalette} from 'material-icons-react';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Fab from '@material-ui/core/Fab';
+import CurrencyFormat from 'react-currency-format';
+
 import store from '../store';
 
 const styles = theme => ({
@@ -72,7 +74,13 @@ class CartItem extends Component {
                     </Grid>
                     </Grid>
                     <Grid item xs style={{textAlign: 'right'}}>
-                            <Typography variant="subheading">$ {item.price}
+                            <Typography variant="subheading">
+                            <CurrencyFormat
+                              value={item.price}
+                              displayType={'text'}
+                              thousandSeparator={true}
+                              prefix={'$ '} />
+
                             </Typography>
                         </Grid>
                     <Grid container

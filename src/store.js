@@ -5,17 +5,23 @@ const reducer = (state, action ) => {
     if (action.type === 'ADD_TO_CART') {
         return {
             ...state,
-            cart: state.cart.concat(action.product)
+            cart: state.cart.concat(action.product),
+            total: calculateTotal(state.cart.concat(action.product))
         };
     } else if(action.type === 'REMOVE_FROM_CART') {
         return {
             ...state,
-            cart: state.cart.filter(product => product.id !== action.product.id)
+            cart: state.cart.filter(product => product.id !== action.product.id),
+            total: calculateTotal(state.cart.filter(product => product.id !== action.product.id))
         }
     }
 
     return state;
 };
+
+function calculateTotal(products) {
+    return products.reduce((a, {price}) => a + price, 0);
+}
 
 function saveToLocalStorage(state) {
     try {
@@ -31,7 +37,10 @@ function loadFromLocalStorage() {
         const serializedState = localStorage.getItem('state')
         if (serializedState === null) {
             console.log('null')
-            return { cart: [] }
+            return {
+                    cart: [],
+                    total: 0
+                    }
         }
         return JSON.parse(serializedState)
     } catch (e) {

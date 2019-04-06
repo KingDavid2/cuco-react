@@ -51,7 +51,6 @@ class HorizontalLinearStepper extends React.Component {
   constructor(props){
     super(props);
 
-
     this.handleChange = this.handleChange.bind(this);
 
   }
@@ -68,7 +67,7 @@ class HorizontalLinearStepper extends React.Component {
     city: '',
     postal_code: '',
     phone: '',
-    email: '',
+    email: ''
   };
 
   isStepOptional = step => step === 10;

@@ -7,6 +7,7 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Typography from '@material-ui/core/Typography';
+import CurrencyFormat from 'react-currency-format';
 
 
 const styles = theme => ({
@@ -30,6 +31,9 @@ const styles = theme => ({
   },
   mainContainer: {
     paddingTop: 24,
+  },
+  total: {
+    paddingTop: '10%'
   }
 });
 
@@ -38,7 +42,8 @@ class Checkout extends Component {
     super();
 
     this.state = {
-      cart: []
+      cart: [],
+      total: 0
     }
 
     this.removeFromCart = this.removeFromCart.bind(this)
@@ -47,7 +52,8 @@ class Checkout extends Component {
   componentDidMount(){
     // this.unsubscribe = store.subscribe(() => {
       this.setState({
-        cart: store.getState().cart
+        cart: store.getState().cart,
+        total: store.getState().total
       });
     // });
   }
@@ -65,7 +71,8 @@ class Checkout extends Component {
     });
 
     this.setState({
-      cart: store.getState().cart
+      cart: store.getState().cart,
+      total: store.getState().total      
     });
   }
 
@@ -91,6 +98,30 @@ class Checkout extends Component {
                   />)
               )}
           </Grid>
+          <Grid container
+            className=''
+            direction="rtl"
+            xs={8}
+            style={{ paddingTop: '10px', textAlign:'right', fontSize:14, }}
+            >
+            <Grid item xs>
+              <Typography variant="Subheading" gutterBottom>
+              Total:
+              </Typography>         
+            </Grid>
+
+            <Grid item xs={1}>
+              <Typography variant="Subheading" gutterBottom>
+              <b>
+              <CurrencyFormat
+                      value={this.state.total}
+                      displayType={'text'}
+                      thousandSeparator={true}
+                      prefix={'$ '} />
+              </b>
+              </Typography>         
+            </Grid>
+            </Grid>
         </Grid>
 
       </div>

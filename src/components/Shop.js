@@ -324,7 +324,7 @@ class Shop extends Component {
                               value={mainPainting.price}
                               displayType={'text'}
                               thousandSeparator={true}
-                              prefix={'$'} />
+                              prefix={'$ '} />
 
                           </div>
                         </div>

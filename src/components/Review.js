@@ -11,6 +11,8 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import CurrencyFormat from 'react-currency-format';
+
 
 const styles = theme => ({
     container: {
@@ -35,13 +37,21 @@ class Review extends Component {
   constructor(props){
     super(props);
 
+    this.state = {
+      cart: [],
+      total: 0
+    }
 
     this.handleChange = this.handleChange.bind(this);
-
   }
 
   componentDidMount(){
-
+    // this.unsubscribe = store.subscribe(() => {
+      this.setState({
+        cart: store.getState().cart,
+        total: store.getState().total      
+      });
+    // });
   }
   componentDidUpdate(){
   }
@@ -69,16 +79,82 @@ class Review extends Component {
           Review
         </Typography>
 
+        <Typography variant="title" gutterBottom>
+          Cart
+        </Typography>
+
+
         <Grid
         container
         spacing={24}
         justify='center'
         >
+        <Grid container
+            className=''
+            xs={24}
+            justify='center'
+            style={{ paddingTop: '10px', textAlign:'right', fontSize:14, }}
+            >
+            <Grid item xs={1}>
+              <Typography variant="Subheading" gutterBottom>
+              Total:
+              </Typography>         
+            </Grid>
+
+            <Grid item xs={1}>
+              <Typography variant="Subheading" gutterBottom>
+              <b>
+              <CurrencyFormat
+                      value={this.state.total}
+                      displayType={'text'}
+                      thousandSeparator={true}
+                      prefix={'$ '} />
+              </b>
+              </Typography>         
+            </Grid>
+        </Grid>
+
+        <Grid container spacing={16} justify='center'>
+          {this.state.cart
+          .map(item =>
+            (
+              <Grid item xs={2}>
+                <Grid container direction="column-reverse">
+                  <Grid item >
+                    <img className='' alt="complex" src={item.url} style={{ maxWidth: '100%' }}/>
+                  </Grid>
+                  <Grid item style={{ paddingTop: '10px', textAlign:'right', fontSize:14, }}>
+                    <CurrencyFormat
+                      value={item.price}
+                      displayType={'text'}
+                      thousandSeparator={true}
+                      prefix={'$ '} />
+                  </Grid>
+                </Grid>
+              </Grid>
+            )
+          )}
+        </Grid>
+        </Grid>
+        
+
+        <Grid item xs={24}>
+          <Typography variant="title" gutterBottom>
+            Shipping
+          </Typography>
+        </Grid>
+
+        <Grid
+        container
+        spacing={24}
+        justify='center'
+        >
+
         <Grid item xs={2}>
           <Typography variant="subheading" gutterBottom>
            First name:
           </Typography>         
-         </Grid>
+        </Grid>
 
          <Grid item xs>
           <Typography variant="subheading" gutterBottom>
@@ -99,13 +175,12 @@ class Review extends Component {
          </Grid>
         </Grid>
 
-
-
-        <Grid
+         <Grid
         container
         spacing={24}
         justify='center'
         >
+
         <Grid item xs={2}>
           <Typography variant="subheading" gutterBottom>
           Address 1:

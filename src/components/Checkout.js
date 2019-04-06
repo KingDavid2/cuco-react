@@ -232,7 +232,7 @@ class HorizontalLinearStepper extends React.Component {
                   onClick={this.handleNext}
                   className={classes.button}
                 >
-                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                  {activeStep === steps.length - 1 ? 'Payment' : 'Next'}
                 </Button>
                 </Grid>
               </div>

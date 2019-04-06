@@ -4,6 +4,8 @@ import './App.css';
 import MainNav from './components/MainNav'
 import Shop from './components/Shop';
 import Checkout from './components/Checkout';
+import Success from './components/Success';
+
 import MaterialIcon, {colorPalette} from 'material-icons-react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
@@ -29,6 +31,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Shop} />
               <Route path="/checkout" component={Checkout} />
+              <Route path="/success" component={Success} />
             </Switch>
           </div>
         </BrowserRouter>

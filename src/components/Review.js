@@ -65,13 +65,200 @@ class Review extends Component {
     return (
       
       <div className="" style={{ padding: 10 }}>
-        <Typography variant="h5" gutterBottom>
+        <Typography variant="headline" gutterBottom>
           Review
         </Typography>
-        <Grid container
+
+        <Grid
+        container
+        spacing={24}
         justify='center'
         >
-            este es el review
+        <Grid item xs={2}>
+          <Typography variant="subheading" gutterBottom>
+           First name:
+          </Typography>         
+         </Grid>
+
+         <Grid item xs>
+          <Typography variant="subheading" gutterBottom>
+           <b>{values.first_name}</b>
+          </Typography>         
+         </Grid>
+
+         <Grid item xs={2}>
+          <Typography variant="subheading" gutterBottom>
+           Last name:
+          </Typography>         
+         </Grid>
+
+         <Grid item xs>
+          <Typography variant="subheading" gutterBottom>
+           <b>{values.last_name}</b>
+          </Typography>         
+         </Grid>
+        </Grid>
+
+
+
+        <Grid
+        container
+        spacing={24}
+        justify='center'
+        >
+        <Grid item xs={2}>
+          <Typography variant="subheading" gutterBottom>
+          Address 1:
+          </Typography>         
+         </Grid>
+
+         <Grid item xs>
+          <Typography variant="subheading" gutterBottom>
+            <b>
+            {values.address1}
+            </b>
+          </Typography>
+         </Grid>
+
+         <Grid item xs={2}>
+          <Typography variant="subheading" gutterBottom>
+           Address 2:
+          </Typography>         
+         </Grid>
+
+         <Grid item xs>
+          <Typography variant="subheading" gutterBottom>
+          <b>
+            {values.address2}
+          </b>
+          </Typography>
+         </Grid>
+        </Grid>
+
+        <Grid
+        container
+        spacing={24}
+        justify='center'
+        >
+        <Grid item xs={2}>
+          <Typography variant="subheading" gutterBottom>
+          Country:
+          </Typography>         
+         </Grid>
+
+         <Grid item xs>
+          <Typography variant="subheading" gutterBottom>
+            <b>
+            {values.country}
+            </b>
+          </Typography>
+         </Grid>
+
+         <Grid item xs={2}>
+          <Typography variant="subheading" gutterBottom>
+           State:
+          </Typography>         
+         </Grid>
+
+         <Grid item xs>
+          <Typography variant="subheading" gutterBottom>
+            <b>
+            {values.state}
+            </b>
+          </Typography>
+         </Grid>
+        </Grid>
+
+        <Grid
+        container
+        spacing={24}
+        justify='center'
+        >
+        <Grid item xs={2}>
+          <Typography variant="subheading" gutterBottom>
+          City:
+          </Typography>         
+         </Grid>
+
+         <Grid item xs>
+          <Typography variant="subheading" gutterBottom>
+            <b>
+            {values.city}
+            </b>
+          </Typography>
+         </Grid>
+
+         <Grid item xs={2}>
+          <Typography variant="subheading" gutterBottom>
+           Postal Code:
+          </Typography>         
+         </Grid>
+
+         <Grid item xs>
+          <Typography variant="subheading" gutterBottom>
+            <b>
+            {values.postal_code}
+            </b>       
+          </Typography>
+         </Grid>
+        </Grid>
+
+
+        <Grid
+        container
+        spacing={24}
+        justify='center'
+        >
+        <Grid item xs={2}>
+          <Typography variant="subheading" gutterBottom>
+          Phone:
+          </Typography>         
+         </Grid>
+
+         <Grid item xs>
+          <Typography variant="subheading" gutterBottom>
+            <b>
+            {values.phone}
+            </b>
+          </Typography>
+         </Grid>
+
+         <Grid item xs={2}>
+          <Typography variant="subheading" gutterBottom>
+           Email:
+          </Typography>         
+         </Grid>
+
+         <Grid item xs>
+          <Typography variant="subheading" gutterBottom>
+            <b>
+            {values.email}
+            </b>
+          </Typography>
+         </Grid>
+        </Grid>
+
+        <Grid
+        container
+        spacing={24}
+        justify='center'
+        >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </Grid>
 
       </div>

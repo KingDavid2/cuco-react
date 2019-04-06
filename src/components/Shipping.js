@@ -112,8 +112,8 @@ class Shipping extends Component {
               id="standard-required"
               label="Address"
               onChange={this.handleChange}
-              name='address'
-              defaultValue={values.address}
+              name='address1'
+              defaultValue={values.address1}
               className={classes.textField + ' shipping-text'}
             />
           </Grid>

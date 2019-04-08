@@ -125,7 +125,28 @@ class HorizontalLinearStepper extends React.Component {
   // };
 
   handleChange(name, value){
-    this.setState({ [name]: value });
+    this.setState({ [name]: value },
+  () => {
+    store.dispatch({
+      type: "ADD_SHIPPING",
+      shipping:      
+              {
+                first_name: this.state.first_name,
+                last_name: this.state.last_name,
+                address1: this.state.address1,
+                address2: this.state.address2,
+                country: this.state.country,
+                state: this.state.state,
+                city: this.state.city,
+                postal_code: this.state.postal_code,
+                phone: this.state.phone,
+                email: this.state.email
+              }
+    })
+  });
+
+
+
   }
 
   getStepContent(step, values) {

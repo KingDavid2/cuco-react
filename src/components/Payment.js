@@ -55,7 +55,8 @@ import {
 
 
         let data = {
-            line_items: store.getState().cart.map( (item) => item.id )
+            line_items: store.getState().cart.map( (item) => item.id ),
+            shipping_address: store.getState().shipping,
             }
 
         let promise1 = fetch('http://localhost:3002/api/v1/checkouts', {

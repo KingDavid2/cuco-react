@@ -14,6 +14,11 @@ const reducer = (state, action ) => {
             cart: state.cart.filter(product => product.id !== action.product.id),
             total: calculateTotal(state.cart.filter(product => product.id !== action.product.id))
         }
+    } else if(action.type === 'ADD_SHIPPING') {
+        return {
+            ...state,
+            shipping: action.shipping
+        }
     }
 
     return state;

@@ -92,7 +92,7 @@ class Review extends Component {
         <Grid container
             className=''
             xs={24}
-            justify='center'
+            justify='left'
             style={{ paddingTop: '10px', textAlign:'right', fontSize:14, }}
             >
             <Grid item xs={1}>
@@ -101,7 +101,11 @@ class Review extends Component {
               </Typography>         
             </Grid>
 
-            <Grid item xs={1}>
+            <Grid
+              item
+              xs={1}
+              style={{ paddingBottom: '20px'}}
+              >
               <Typography variant="Subheading" gutterBottom>
               <b>
               <CurrencyFormat
@@ -114,27 +118,6 @@ class Review extends Component {
             </Grid>
         </Grid>
 
-        <Grid container spacing={16} justify='center'>
-          {this.state.cart
-          .map(item =>
-            (
-              <Grid item xs={2}>
-                <Grid container direction="column-reverse">
-                  <Grid item >
-                    <img className='' alt="complex" src={item.url} style={{ maxWidth: '100%' }}/>
-                  </Grid>
-                  <Grid item style={{ paddingTop: '10px', textAlign:'right', fontSize:14, }}>
-                    <CurrencyFormat
-                      value={item.price}
-                      displayType={'text'}
-                      thousandSeparator={true}
-                      prefix={'$ '} />
-                  </Grid>
-                </Grid>
-              </Grid>
-            )
-          )}
-        </Grid>
         </Grid>
         
 

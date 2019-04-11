@@ -206,7 +206,7 @@ class Front extends Component {
                 justify='right'
                 >
                 <Button variant="contained" color="primary" className={classes.button}>
-                  Sign up
+                  Sign up!!!
                 </Button>
               </Grid>              
             </Grid>
